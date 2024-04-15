@@ -10,18 +10,14 @@ HAVING COUNT(transactions.id) > 30;
 
 #ejercicio 2:
 SELECT 
-    AVG(sum_amount) AS average_transaction_sum, company_name 
-FROM (
-    SELECT SUM(transactions.amount) AS sum_amount, companies.company_name, credit_card.iban
-    FROM sprint4.transactions  
-	JOIN sprint4.companies 
-    ON transactions.business_id = companies.company_id
-	JOIN sprint4.credit_card 
-    ON credit_card.id = transactions.card_id
-    WHERE companies.company_name = 'Donec Ltd'
-    GROUP BY companies.company_name, credit_card.iban
-) AS subquery
-GROUP BY company_name;
+    AVG(amount) AS average_amount, iban
+FROM sprint4.transactions  
+JOIN sprint4.companies 
+ON transactions.business_id = companies.company_id
+JOIN sprint4.credit_card 
+ON credit_card.id = transactions.card_id
+WHERE companies.company_name = 'Donec Ltd'
+GROUP BY credit_card.iban;
 
 ##NIVEL 2:
 #creación de tabla:
